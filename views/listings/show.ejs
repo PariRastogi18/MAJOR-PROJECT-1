@@ -35,8 +35,8 @@
   <div class="col-12 col-md-10 col-lg-8 mb-4">
     <!-- Buttons ko mobile par full width flex block banaya aur side-by-side kiya -->
     <div class="d-flex gap-3">
-      <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4 flex-grow-1 flex-md-grow-0">Edit</a>
-      <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="flex-grow-1 flex-md-grow-0">
+      <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4 grow flex-md-grow-0">Edit</a>
+      <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="grow flex-md-grow-0">
         <button class="btn btn-danger w-100 px-4">Delete</button>
       </form>
     </div>
