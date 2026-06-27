@@ -1,74 +1,65 @@
 <style>
-  /* Global sticky setup for smooth scroll overlapping */
   .navbar {
     background-color: #ffffff !important;
     z-index: 1000;
   }
-  
   .btn-search {
     background-color: #fe424d;
     color: white;
     border-radius: 25px;
-    padding: 0.5rem 1.2rem; /* Vertical aur horizontal padding set ki */
+    padding: 0.5rem 1.2rem;
     border: none;
     transition: background-color 0.2s ease;
   }
-  
   .btn-search:hover {
-    background-color: #e0323c; /* Thoda darker premium red on hover */
+    background-color: #e0323c;
     color: white;
   }
-  
-  .btn-search i {
-    display: inline;
-    margin-right: 0.5rem;
-  }
-
   .search-inp {
     border-radius: 25px;
-    padding: 0.5rem 1.5rem; /* Padding fix ki taaki placeholder text clear dikhe */
+    padding: 0.5rem 1.5rem;
   }
 
-  /* Custom overrides for smooth spacing on mobile menu drop */
+  /* Responsive Rules for Mobile View (Under 768px) */
   @media (max-width: 767.98px) {
-    .navbar-nav {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+    .navbar-collapse {
+      background-color: #ffffff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 0.5rem;
     }
-    
-    /* Search form mobile layout stretch */
     .search-form-container {
-      width: 100%;
-      margin: 0.8rem 0;
-    }
-    
-    .search-inp {
       width: 100% !important;
+      margin: 1rem 0 !important;
     }
-    
-    /* Mobile standard link hover effect */
+    .search-form-container form {
+      display: flex;
+      flex-direction: row !important; /* Input aur Button side-by-side rahenge */
+      width: 100%;
+    }
+    .search-inp {
+      flex-grow: 1; /* Pure container ki space cover karega */
+      min-width: 0; /* Bootstrap text truncation overflow safety */
+    }
+    .btn-search {
+      flex-shrink: 0;
+    }
     .nav-link {
       padding: 0.6rem 0 !important;
       border-bottom: 1px solid #f0f0f0;
-    }
-    
-    /* Collapse open hone par aakhri link ka border na dikhe */
-    .navbar-nav:last-child .nav-link:last-child {
-      border-bottom: none;
     }
   }
 </style>
 
 <nav class="navbar navbar-expand-md border-bottom sticky-top shadow-sm">
   <div class="container-fluid px-3 px-md-4">
-    <!-- Brand Logo Icon -->
     <a class="navbar-brand text-danger fs-4" href="/listings">
       <i class="fa-regular fa-compass"></i>
     </a>
     
-    <!-- Mobile Toggle Hamburger Button -->
     <button
-      class="navbar-toggler border-0"
+      class="navbar-toggler border"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
@@ -79,32 +70,27 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <!-- Collapsible Menu Wrapper -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      
-      <!-- Left Align: Primary Links -->
       <div class="navbar-nav me-auto">
         <a class="nav-link text-dark" href="/listings">Explore</a>
       </div>
 
-      <!-- Center Align: Responsive Search Module -->
-      <div class="navbar-nav mx-auto search-form-container">
-        <form method="get" action="/listings" class="d-flex w-100" role="search">
+      <!-- Search Container Layout -->
+      <div class="navbar-nav mx-auto search-form-container w-50">
+        <form method="get" action="/listings" class="d-flex" role="search">
           <input 
             class="form-control me-2 search-inp" 
             type="search" 
             placeholder="Search destinations" 
             name="search"
-            aria-label="Search"
           />
           <button class="btn btn-search d-flex align-items-center" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i><span>Search</span>
+            <i class="fa-solid fa-magnifying-glass me-1"></i><span>Search</span>
           </button>
         </form>
       </div>
 
-      <!-- Right Align: Authentication & Action Links -->
-      <div class="navbar-nav ms-auto alignment-fix">
+      <div class="navbar-nav ms-auto">
         <a class="nav-link text-dark" href="/listings/new">Airbnb your home</a>
         <% if(typeof currUser === "undefined" || !currUser) { %>
           <a class="nav-link text-dark" href="/signup"><b>Sign up</b></a>
@@ -113,7 +99,6 @@
           <a class="nav-link text-dark" href="/logout">Logout</a>
         <% } %>
       </div>
-      
     </div>
   </div>
 </nav>

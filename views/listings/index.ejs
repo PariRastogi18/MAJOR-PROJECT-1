@@ -1,206 +1,179 @@
-<% layout("/layouts/boilerplate") %>
-  <style>
-    /* Main Layout Utilities for Top Controls */
+<style>
+  /* Elements collision rokne ke liye clearance spacing wrapper */
+  .top-controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1rem;
+    width: 100%;
+    clear: both; /* Floating items spacing safety */
+  }
+
+  #filters {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  #filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter {
+    text-align: center;
+    margin-right: 1.5rem;
+    opacity: 0.7;
+    cursor: pointer;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .filter p {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+    margin-top: 0.3rem;
+  }
+
+  /* Fixed Custom CSS Tax Container for No Borders break out */
+  .tax-toggle {
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    height: 3.5rem;
+    padding: 0 1.2rem;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tax-toggle .form-switch {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
+  }
+
+  .tax-toggle .form-check-label {
+    font-size: 0.88rem;
+    color: #484848;
+    cursor: pointer;
+  }
+
+  .tax-toggle .form-check-input {
+    margin: 0;
+    cursor: pointer;
+    height: 1.4rem;
+    width: 2.5rem;
+  }
+
+  .tax-info {
+    display: none;
+  }
+
+  /* Media Queries for Desktop and Tablets */
+  @media (min-width: 768px) {
     .top-controls-wrapper {
-      display: flex;
-      flex-direction: column; /* Mobile par: Filters upar, Toggle uske neeche */
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    /* Filters Container Rules */
-    #filters {
-      display: flex;
-      align-items: center;
-      overflow-x: auto; /* Mobile par horizontal swipe/scroll */
-      white-space: nowrap;
-      padding: 0.5rem 0;
-      -webkit-overflow-scrolling: touch;
-      flex-grow: 1;
-    }
-    
-    /* Hide Scrollbar for Chrome, Safari and Opera */
-    #filters::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide Scrollbar for IE, Edge and Firefox */
-    #filters {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
-
-    .filter {
-      text-align: center;
-      margin-right: 1.5rem;
-      opacity: 0.7;
-      cursor: pointer;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    a {
-      text-decoration: none;
-      color: black;
-    }
-
-    .filter:hover {
-      opacity: 1;
-    }
-
-    .filter p {
-      font-size: 0.75rem;
-      margin-bottom: 0.2rem;
-      margin-top: 0.3rem;
-    }
-
-    .tax-info {
-      display: none;
-    }
-
-    /* Modern & Responsive Tax Toggle Container */
-    .tax-toggle {
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      height: 3.2rem;
-      padding: 0 1rem;
-      display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      width: 100%; /* Mobile par full width card look */
+      margin-top: 1.5rem;
     }
-
-    .filter.active {
-      color: #fe424d;
-      opacity: 1;
-      border-bottom: 3px solid #fe424d;
+    .tax-toggle {
+      width: auto;
+      border: 2px solid black;
+      border-radius: 10px;
+      box-shadow: none;
     }
+  }
+</style>
 
-    .filter.active i {
-      color: #fe424d;
-    }
-
-    .filter.active p {
-      font-weight: 600;
-    }
-
-    /* Media Queries for Desktop and Tablets */
-    @media (min-width: 768px) {
-      .top-controls-wrapper {
-        flex-direction: row; /* Desktop par side-by-side */
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 1.5rem;
-      }
-      .filter {
-        margin-right: 2rem;
-      }
-      .filter p {
-        font-size: 0.8rem;
-      }
-      .tax-toggle {
-        width: auto; /* Desktop par content ke hisab se limited width */
-        margin-left: 2rem;
-        box-shadow: none;
-        border: 2px solid black; /* Aapka original border look tablet/desktop par */
-        border-radius: 10px;
-      }
-    }
-  </style>
-
-  <!-- Combined Top Section: Filters + Toggle -->
-  <div class="top-controls-wrapper">
-    <!-- Horizontal Scrollable Filters -->
-    <div id="filters">
-      <a href="/listings?category=trending" class="filter <%= category === 'trending' ? 'active' : '' %>">
-        <div><i class="fa-solid fa-fire"></i></div>
-        <p>Trending</p>
-      </a>
-
-      <a href="/listings?category=rooms" class="filter <%= category === 'rooms' ? 'active' : '' %>">
-        <div><i class="fa-solid fa-bed"></i></div>
-        <p>Rooms</p>
-      </a>
-
-      <a href="/listings?category=iconicCities" class="filter <%= category === 'iconicCities' ? 'active' : '' %>">
-        <div><i class="fa-solid fa-mountain-city"></i></div>
-        <p>Iconic Cities</p>
-      </a>
-
-      <a href="/listings?category=mountains" class="filter <%= category === 'mountains' ? 'active' : '' %>">
-        <div><i class="fa-solid fa-mountain"></i></div>
-        <p>Mountains</p>
-      </a>
-
-      <a href="/listings?category=castles" class="filter <%= category === 'castles' ? 'active' : '' %>">
-        <div><i class="fa-brands fa-fort-awesome"></i></div>
-        <p>Castles</p>
-      </a>
-
-      <a href="/listings?category=amazingPools" class="filter <%= category === 'amazingPools' ? 'active' : '' %>">
-        <div><i class="fa-solid fa-person-swimming"></i></div>
-        <p>Amazing Pools</p>
-      </a>
-
-      <a href="/listings?category=camping" class="filter <%= category === 'camping' ? 'active' : '' %>">
-        <div><i class="fa-solid fa-campground"></i></div>
-        <p>Camping</p>
-      </a>
-
-      <a href="/listings?category=farms" class="filter <%= category === 'farms' ? 'active' : '' %>">
-        <div><i class="fa-solid fa-cow"></i></div>
-        <p>Farms</p>
-      </a>
-
-      <a href="/listings?category=arctic" class="filter <%= category === 'arctic' ? 'active' : '' %>">
-        <div><i class="fa-regular fa-snowflake"></i></div>
-        <p>Arctic</p>
-      </a>
-    </div>
-
-    <!-- Bootstrap Standard Tax Toggle Switch Markup -->
-    <div class="tax-toggle">
-      <div class="form-check form-switch form-check-reverse w-100 d-flex justify-content-between align-items-center p-0">
-        <label class="form-check-label small fw-medium text-secondary me-5" for="switchCheckDefault">Display total before taxes</label>
-        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" style="cursor: pointer;">
-      </div>
-    </div>
+<div class="top-controls-wrapper">
+  <!-- Horizontal Scrollable Filters -->
+  <div id="filters">
+    <a
+      href="/listings?category=trending"
+      class="filter <%= typeof category !== 'undefined' && category === 'trending' ? 'active' : '' %>"
+    >
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </a>
+    <a
+      href="/listings?category=rooms"
+      class="filter <%= typeof category !== 'undefined' && category === 'rooms' ? 'active' : '' %>"
+    >
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </a>
+    <a
+      href="/listings?category=iconicCities"
+      class="filter <%= typeof category !== 'undefined' && category === 'iconicCities' ? 'active' : '' %>"
+    >
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <p>Iconic Cities</p>
+    </a>
+    <a
+      href="/listings?category=mountains"
+      class="filter <%= typeof category !== 'undefined' && category === 'mountains' ? 'active' : '' %>"
+    >
+      <div><i class="fa-solid fa-mountain"></i></div>
+      <p>Mountains</p>
+    </a>
+    <a
+      href="/listings?category=castles"
+      class="filter <%= typeof category !== 'undefined' && category === 'castles' ? 'active' : '' %>"
+    >
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </a>
+    <a
+      href="/listings?category=amazingPools"
+      class="filter <%= typeof category !== 'undefined' && category === 'amazingPools' ? 'active' : '' %>"
+    >
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Amazing Pools</p>
+    </a>
+    <a
+      href="/listings?category=camping"
+      class="filter <%= typeof category !== 'undefined' && category === 'camping' ? 'active' : '' %>"
+    >
+      <div><i class="fa-solid fa-campground"></i></div>
+      <p>Camping</p>
+    </a>
+    <a
+      href="/listings?category=farms"
+      class="filter <%= typeof category !== 'undefined' && category === 'farms' ? 'active' : '' %>"
+    >
+      <div><i class="fa-solid fa-cow"></i></div>
+      <p>Farms</p>
+    </a>
+    <a
+      href="/listings?category=arctic"
+      class="filter <%= typeof category !== 'undefined' && category === 'arctic' ? 'active' : '' %>"
+    >
+      <div><i class="fa-regular fa-snowflake"></i></div>
+      <p>Arctic</p>
+    </a>
   </div>
 
-  <!-- Cards Section Grid -->
-  <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-    <% for(let listing of allListings){ %>
-      <div class="col-12 col-sm-6 col-lg-4 mb-4">
-        <a href="/listings/<%= listing._id %>" class="listing-link">
-          <div class="card h-100 listing-card border-0">
-            <img src="<%= listing.image.url %>" class="card-img-top img-fluid rounded-3" alt="listing_image" style="height: 20rem; object-fit: cover;">
-            <div class="card-img-overlay"></div>
-            <div class="card-body px-0">
-              <b class="card-text"><%= listing.title %></b>
-              <p class="card-text">₹ <%= listing.price.toLocaleString("en-IN") %>/night</p>
-              <i class="tax-info text-danger fw-semibold">&nbsp; &nbsp; +18% GST</i>
-            </div>
-          </div>
-        </a>
-      </div>
-    <% } %>
+  <!-- Corrected Tax Toggle Switch Module Inside Box bounds -->
+  <div class="tax-toggle">
+    <div class="form-check form-switch">
+      <label class="form-check-label fw-medium" for="switchCheckDefault"
+        >Display total before taxes</label
+      >
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefault"
+      />
+    </div>
   </div>
-
-  <script>
-    // Pure Javascript for Toggling State Safely
-    let taxSwitch = document.getElementById("switchCheckDefault");
-    if(taxSwitch) {
-      taxSwitch.addEventListener("click",()=>{
-        let taxInfo = document.getElementsByClassName("tax-info");
-        for(let info of taxInfo){
-          if(info.style.display != "inline"){
-            info.style.display = "inline";
-          } else {
-            info.style.display = "none";
-          }
-        }
-      });
-    }
-  </script>
+</div>
