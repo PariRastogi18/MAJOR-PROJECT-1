@@ -14,7 +14,13 @@ module.exports.index = async (req, res) => {
   const allListings = await Listing.find(filter);
 
   if (allListings.length === 0) {
-    req.flash("error", "No listings found!");
+    if (category) {
+      req.flash("error", `No listings found in "${category}" category.`);
+    } else if (search) {
+      req.flash("error", `No listings found for "${search}".`);
+    } else {
+      req.flash("error", "No listings found!");
+    }
     return res.render("listings/index", {
       allListings: [],
       category,

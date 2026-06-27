@@ -37,6 +37,25 @@
       display: flex;
       align-items: center;
     }
+
+    
+.filter.active {
+  color: #fe424d;
+  opacity: 1;
+}
+
+.filter.active i {
+  color: #fe424d;
+}
+
+.filter.active p {
+  font-weight: 600;
+}
+
+.filter.active {
+  border-bottom: 3px solid #fe424d;
+}
+
   </style>
      <div id="filters">
       <a href="/listings?category=trending" class="filter">
@@ -90,6 +109,54 @@
         </div>
       </div>
      </div>
+
+     <div id="filters">
+  <a href="/listings?category=trending" class="filter <%= category === 'trending' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </a>
+
+  <a href="/listings?category=rooms" class="filter <%= category === 'rooms' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </a>
+
+  <a href="/listings?category=iconicCities" class="filter <%= category === 'iconicCities' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-mountain-city"></i></div>
+    <p>Iconic Cities</p>
+  </a>
+
+  <a href="/listings?category=mountains" class="filter <%= category === 'mountains' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Mountains</p>
+  </a>
+
+  <a href="/listings?category=castles" class="filter <%= category === 'castles' ? 'active' : '' %>">
+    <div><i class="fa-brands fa-fort-awesome"></i></div>
+    <p>Castles</p>
+  </a>
+
+  <a href="/listings?category=amazingPools" class="filter <%= category === 'amazingPools' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+    <p>Amazing Pools</p>
+  </a>
+
+  <a href="/listings?category=camping" class="filter <%= category === 'camping' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>Camping</p>
+  </a>
+
+  <a href="/listings?category=farms" class="filter <%= category === 'farms' ? 'active' : '' %>">
+    <div><i class="fa-solid fa-cow"></i></div>
+    <p>Farms</p>
+  </a>
+
+  <a href="/listings?category=arctic" class="filter <%= category === 'arctic' ? 'active' : '' %>">
+    <div><i class="fa-regular fa-snowflake"></i></div>
+    <p>Arctic</p>
+  </a>
+</div>
+
     <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
       <% for(let listing of allListings){ %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
