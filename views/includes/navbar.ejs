@@ -1,57 +1,119 @@
 <style>
-  .btn-search{
+  /* Global sticky setup for smooth scroll overlapping */
+  .navbar {
+    background-color: #ffffff !important;
+    z-index: 1000;
+  }
+  
+  .btn-search {
     background-color: #fe424d;
     color: white;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    padding: 0.5rem 1.2rem; /* Vertical aur horizontal padding set ki */
+    border: none;
+    transition: background-color 0.2s ease;
   }
-  .btn-search:hover{
-    background-color: #fe424d;
+  
+  .btn-search:hover {
+    background-color: #e0323c; /* Thoda darker premium red on hover */
     color: white;
   }
-  .btn-search i{
+  
+  .btn-search i {
     display: inline;
     margin-right: 0.5rem;
   }
 
-  .search-inp{
+  .search-inp {
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem 1.5rem; /* Padding fix ki taaki placeholder text clear dikhe */
+  }
+
+  /* Custom overrides for smooth spacing on mobile menu drop */
+  @media (max-width: 767.98px) {
+    .navbar-nav {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    
+    /* Search form mobile layout stretch */
+    .search-form-container {
+      width: 100%;
+      margin: 0.8rem 0;
+    }
+    
+    .search-inp {
+      width: 100% !important;
+    }
+    
+    /* Mobile standard link hover effect */
+    .nav-link {
+      padding: 0.6rem 0 !important;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    /* Collapse open hone par aakhri link ka border na dikhe */
+    .navbar-nav:last-child .nav-link:last-child {
+      border-bottom: none;
+    }
   }
 </style>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+<nav class="navbar navbar-expand-md border-bottom sticky-top shadow-sm">
+  <div class="container-fluid px-3 px-md-4">
+    <!-- Brand Logo Icon -->
+    <a class="navbar-brand text-danger fs-4" href="/listings">
+      <i class="fa-regular fa-compass"></i>
+    </a>
+    
+    <!-- Mobile Toggle Hamburger Button -->
     <button
-      class="navbar-toggler"
+      class="navbar-toggler border-0"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    
+    <!-- Collapsible Menu Wrapper -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
+      
+      <!-- Left Align: Primary Links -->
+      <div class="navbar-nav me-auto">
+        <a class="nav-link text-dark" href="/listings">Explore</a>
       </div>
 
-      <div class="navbar-nav ms-auto">
-        <form method="get" action="/listings" class="d-flex" role="search">
-          <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" name="search"/>
-          <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+      <!-- Center Align: Responsive Search Module -->
+      <div class="navbar-nav mx-auto search-form-container">
+        <form method="get" action="/listings" class="d-flex w-100" role="search">
+          <input 
+            class="form-control me-2 search-inp" 
+            type="search" 
+            placeholder="Search destinations" 
+            name="search"
+            aria-label="Search"
+          />
+          <button class="btn btn-search d-flex align-items-center" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i><span>Search</span>
+          </button>
         </form>
       </div>
 
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+      <!-- Right Align: Authentication & Action Links -->
+      <div class="navbar-nav ms-auto alignment-fix">
+        <a class="nav-link text-dark" href="/listings/new">Airbnb your home</a>
         <% if(typeof currUser === "undefined" || !currUser) { %>
-        <a class="nav-link" href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
-        <% } else{ %>
-        <a class="nav-link" href="/logout">Logout</a>
+          <a class="nav-link text-dark" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link text-dark" href="/login"><b>Log in</b></a>
+        <% } else { %>
+          <a class="nav-link text-dark" href="/logout">Logout</a>
         <% } %>
       </div>
+      
     </div>
   </div>
 </nav>

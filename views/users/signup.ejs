@@ -1,45 +1,59 @@
 <% layout("layouts/boilerplate") %>
 
-<div class="row mt-3">
-  <h4 class="col-6 offset-3">SignUp on WanderLust</h4>
-  <div class="col-6 offset-3">
+<!-- Parent row ko center kiya aur mobile screens ke liye side spacing (px-3) add ki -->
+<div class="row mt-5 justify-content-center px-3 px-sm-0">
+  <!-- Mobile par full width, tablet par normal, aur desktop par ek elegant dynamic card box -->
+  <div
+    class="col-12 col-sm-8 col-md-6 col-lg-5 shadow-sm border p-4 rounded-3 bg-white"
+  >
+    <h4 class="mb-4 text-center text-md-start fw-bold">SignUp on WanderLust</h4>
     <form action="/signup" method="post" class="needs-validation" novalidate>
+      <!-- Username Field -->
       <div class="mb-3">
-        <label for="username" class="form-lable">Username</label>
+        <label for="username" class="form-label">Username</label>
         <input
           name="username"
           id="username"
           type="text"
+          placeholder="Choose a unique username"
           class="form-control"
           required
         />
         <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please choose a username.</div>
       </div>
 
+      <!-- Email Field -->
       <div class="mb-3">
-        <label for="email" class="form-lable">Email</label>
+        <label for="email" class="form-label">Email</label>
         <input
           name="email"
           id="email"
           type="email"
+          placeholder="Enter your email address"
           class="form-control"
           required
         />
-        <!-- <div class="valid-feedback">Looks good!</div> -->
+        <div class="valid-feedback">Email format looks valid!</div>
+        <div class="invalid-feedback">Please enter a valid email address.</div>
       </div>
 
+      <!-- Password Field -->
       <div class="mb-3">
-        <label for="password" class="form-lable">Password</label>
+        <label for="password" class="form-label">Password</label>
         <input
           name="password"
           id="password"
           type="password"
+          placeholder="Create a strong password"
           class="form-control"
           required
         />
-        <!-- <div class="valid-feedback">Looks good!</div> -->
+        <div class="invalid-feedback">Please enter a password.</div>
       </div>
-      <button class="btn btn-success">SignUp</button>
+
+      <!-- Submit Button (Mobile par full width touch target aur sleek custom padding) -->
+      <button class="btn btn-success w-100 mt-2 py-2">SignUp</button>
     </form>
   </div>
 </div>

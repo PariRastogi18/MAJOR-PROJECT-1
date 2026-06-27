@@ -1,16 +1,34 @@
+<!-- Parent row jo alerts ko center karegi aur mobile par side padding (px-3) degi -->
+<div class="row mt-3 justify-content-center px-3 px-md-0">
+  <div class="col-12 col-md-8 col-lg-6">
+    
+    <!-- Success Flash Messages Loop -->
     <% if(typeof success !== "undefined" && success.length > 0){ %> 
-    <% success.forEach(msg => { %>
-    <div class="alert alert-success alert-dismissible fade show col-6 offset-3">
-      <%= msg %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-  <% }) %>
+      <% success.forEach(msg => { %>
+      <div class="alert alert-success alert-dismissible fade show shadow-sm d-flex align-items-center mb-3" role="alert">
+        <!-- Success Check Icon -->
+        <i class="fa-solid fa-circle-check me-3 fs-5"></i>
+        <div class="flex-grow-1">
+          <%= msg %>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% }) %>
     <% } %>
+
+    <!-- Error Flash Messages Loop -->
     <% if(typeof error !== "undefined" && error.length > 0){ %> 
-    <% error.forEach(msg => { %>
-    <div class="alert alert-danger alert-dismissible fade show col-6 offset-3">
-      <%= msg %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-  <% }) %>
+      <% error.forEach(msg => { %>
+      <div class="alert alert-danger alert-dismissible fade show shadow-sm d-flex align-items-center mb-3" role="alert">
+        <!-- Error Warning Icon -->
+        <i class="fa-solid fa-triangle-exclamation me-3 fs-5"></i>
+        <div class="flex-grow-1">
+          <%= msg %>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% }) %>
     <% } %>
+
+  </div>
+</div>

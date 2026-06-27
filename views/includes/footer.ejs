@@ -1,14 +1,105 @@
 <footer>
+  <style>
+    /* Responsive Footer Core Styling */
+    footer {
+      background-color: #f7f7f7; /* Vibe Check: Premium light background */
+      border-top: 1px solid #e0e0e0;
+      padding: 1.5rem 0;
+      width: 100%;
+    }
+
+    .f-info {
+      display: flex;
+      flex-direction: column; /* Mobile par default: Vertical stack */
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .f-info-socials {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .f-info-socials i {
+      font-size: 1.4rem;
+      color: #222222;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .f-info-socials i:hover {
+      color: #fe424d; /* Dynamic brand pink hover color */
+    }
+
+    .f-info-brand {
+      font-size: 0.9rem;
+      color: #555555;
+    }
+
+    .f-info-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .f-info-links a {
+      text-decoration: none;
+      color: #555555;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .f-info-links a:hover {
+      text-decoration: underline;
+      color: #fe424d;
+    }
+
+    /* Media Query for Tablet and Desktop Screens */
+    @media (min-width: 768px) {
+      .f-info {
+        flex-direction: row; /* Desktop par side-by-side row display */
+        justify-content: space-between;
+        gap: 0;
+      }
+
+      /* Order swap taaki structure: Copyright -> Links -> Socials dikhe standard format me */
+      .f-info-brand {
+        order: 1;
+      }
+      .f-info-links {
+        order: 2;
+        margin-right: auto;
+        margin-left: 2rem; /* Brand name se thodi dori */
+      }
+      .f-info-socials {
+        order: 3;
+      }
+    }
+  </style>
+
   <div class="f-info">
-    <div class="f-info-socials">
-      <i class="fa-brands fa-square-facebook"></i>
-      <i class="fa-brands fa-square-instagram"></i>
-      <i class="fa-brands fa-linkedin"></i>
-    </div>
-    <div class="f-info-brand">&copy;WonderLust Private Limited</div>
+    <div class="f-info-brand">&copy; WanderLust Private Limited</div>
+
     <div class="f-info-links">
       <a href="/privacy">Privacy</a>
-      <a href="/terms">Term</a>
+      <a href="/terms">Terms</a>
+      <!-- Term ko standard Terms kiya -->
+    </div>
+
+    <div class="f-info-socials">
+      <a href="#" style="color: inherit"
+        ><i class="fa-brands fa-square-facebook"></i
+      ></a>
+      <a href="#" style="color: inherit"
+        ><i class="fa-brands fa-square-instagram"></i
+      ></a>
+      <a href="#" style="color: inherit"
+        ><i class="fa-brands fa-linkedin"></i
+      ></a>
     </div>
   </div>
 </footer>

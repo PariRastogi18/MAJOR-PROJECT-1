@@ -1,31 +1,43 @@
 <% layout("layouts/boilerplate") %>
 
-<div class="row mt-3">
-  <h4 class="col-6 offset-3">Login</h4>
-  <div class="col-6 offset-3">
+<!-- Parent row ko center align kiya taaki bina offset ke content automatic beech me rahe -->
+<div class="row mt-5 justify-content-center px-3 px-sm-0">
+  <!-- Mobile par full width, tablet par thoda bada, aur desktop par perfectly sleek container size -->
+  <div
+    class="col-12 col-sm-8 col-md-6 col-lg-4 shadow-sm border p-4 rounded-3 bg-white"
+  >
+    <h4 class="mb-4 text-center text-md-start fw-bold">Login</h4>
     <form action="/login" method="post" class="needs-validation" novalidate>
+      <!-- Username Field -->
       <div class="mb-3">
-        <label for="username" class="form-lable">Username</label>
+        <label for="username" class="form-label">Username</label>
         <input
           name="username"
           id="username"
           type="text"
+          placeholder="Enter your username"
           class="form-control"
           required
         />
+        <div class="invalid-feedback">Please enter your username.</div>
       </div>
 
+      <!-- Password Field -->
       <div class="mb-3">
-        <label for="password" class="form-lable">Password</label>
+        <label for="password" class="form-label">Password</label>
         <input
           name="password"
           id="password"
           type="password"
+          placeholder="Enter your password"
           class="form-control"
           required
         />
+        <div class="invalid-feedback">Please enter your password.</div>
       </div>
-      <button class="btn btn-success">Login</button>
+
+      <!-- Button (Mobile par full width touch targets ke liye, desktop par auto) -->
+      <button class="btn btn-success w-100 mt-2 py-2">Login</button>
     </form>
   </div>
 </div>

@@ -1,7 +1,8 @@
 <% layout("layouts/boilerplate") %>
-<div class="row mt-3">
-  <div class="col-8 offset-2">
-    <h3>Edit your Listing</h3>
+<div class="row mt-3 justify-content-center">
+  <!-- Mobile par full width (col-12), tablet par col-10, desktop par col-8 aur center aligned -->
+  <div class="col-12 col-md-10 col-lg-8 px-4 px-md-0">
+    <h3 class="mb-4">Edit your Listing</h3>
     <form
       action="/listings/<%= listing._id  %>?_method=PUT"
       method="post"
@@ -10,9 +11,10 @@
       enctype="multipart/form-data"
     >
       <div class="mb-3">
-        <label for="title" class="form-lable">Title</label>
+        <label for="title" class="form-label">Title</label>
         <input
           name="listing[title]"
+          id="title"
           type="text"
           placeholder="enter title"
           value="<%= listing.title  %>"
@@ -21,41 +23,53 @@
         />
         <div class="valid-feedback">Title looks good!</div>
       </div>
+
       <div class="mb-3">
-        <label for="description" class="form-lable">Description</label>
+        <label for="description" class="form-label">Description</label>
+        <!-- cols="70" ko hata kar responsive banaya, ab form-control iski width auto-handle karega -->
         <textarea
           name="listing[description]"
-          type="text"
+          id="description"
           placeholder="enter description"
-          rows="10"
-          cols="70"
+          rows="6"
           class="form-control"
           required
         >
-     <%= listing.description  %></textarea
+<%= listing.description %></textarea
         >
         <div class="invalid-feedback">Description should be valid</div>
       </div>
 
       <div class="mb-3">
-        <p>Original Listing Image</p>
-        <img src="<%= originalImageUrl %>" alt="" height="200" , width="300" />
+        <p class="form-label mb-2">Original Listing Image</p>
+        <!-- Image ko fluid banaya taaki mobile screen se bahar na nikle -->
+        <div class="img-preview-container" style="max-width: 300px">
+          <img
+            src="<%= originalImageUrl %>"
+            alt="original_image"
+            class="img-fluid rounded-3 border"
+            style="height: 150px; width: 100%; object-fit: cover"
+          />
+        </div>
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-lable">Upload New Image</label>
+        <label for="image" class="form-label">Upload New Image</label>
         <input
           name="listing[image]"
+          id="image"
           type="file"
-          placeholder="enter image URL/Link"
           class="form-control"
         />
       </div>
-      <div class="row">
-        <div class="mb-3 col-md-4">
-          <label for="Price" class="form-lable">Price</label>
+
+      <!-- Price aur Country row ko mobile par vertical aur tablet/desktop par horizontal kiya -->
+      <div class="row row-cols-1 row-cols-md-2 g-3">
+        <div class="col-md-4">
+          <label for="Price" class="form-label">Price</label>
           <input
             name="listing[price]"
+            id="Price"
             type="number"
             placeholder="enter price"
             value="<%= listing.price  %>"
@@ -64,10 +78,11 @@
           />
           <div class="invalid-feedback">Price should be valid</div>
         </div>
-        <div class="mb-3 col-md-8">
-          <label for="country" class="form-lable">Country</label>
+        <div class="col-md-8">
+          <label for="country" class="form-label">Country</label>
           <input
             name="listing[country]"
+            id="country"
             value="<%= listing.country  %>"
             type="text"
             placeholder="enter country"
@@ -77,10 +92,12 @@
           <div class="invalid-feedback">Country should be valid</div>
         </div>
       </div>
-      <div class="mb-3">
-        <label for="location" class="form-lable">Location</label>
+
+      <div class="mb-3 mt-3">
+        <label for="location" class="form-label">Location</label>
         <input
           name="listing[location]"
+          id="location"
           value="<%= listing.location  %>"
           type="text"
           placeholder="enter location"
@@ -89,7 +106,9 @@
         />
         <div class="invalid-feedback">Location should be valid</div>
       </div>
-      <button class="btn add-btn mt-3">Edit</button>
+
+      <!-- Button ko mobile par full-width kiya user experience ke liye -->
+      <button class="btn add-btn mt-3 w-100 w-md-auto px-5">Edit</button>
     </form>
   </div>
 </div>
