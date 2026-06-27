@@ -15,7 +15,10 @@ module.exports.index = async (req, res) => {
 
   if (allListings.length === 0) {
     req.flash("error", "No listings found!");
-    return res.redirect("/listings");
+    return res.render("listings/index", {
+      allListings: [],
+      category,
+    });
   }
 
   res.render("listings/index", { allListings, category });
