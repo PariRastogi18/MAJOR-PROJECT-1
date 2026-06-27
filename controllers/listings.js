@@ -1,38 +1,38 @@
 const Listing = require("../models/listing");
 
-// module.exports.index = async (req, res) => {
-//   let { category, search } = req.query;
-
-//   let filter = {};
-//   if (category) {
-//     filter.category = category;
-//   }
-//   if (search && search.trim() !== "") {
-//     filter.country = { $regex: search.trim(), $options: "i" };
-//   }
-
-//   const allListings = await Listing.find(filter);
-
-//   if (allListings.length === 0) {
-//     req.flash("error", "No listings found!");
-//     return res.render("listings/index", {
-//       allListings: [],
-//       category,
-//     });
-//   }
-
-//   res.render("listings/index", { allListings, category });
-// };
-
 module.exports.index = async (req, res) => {
-  const allListings = await Listing.find({});
-  console.log("Listings count:", allListings.length);
+  let { category, search } = req.query;
 
-  res.render("listings/index", {
-    allListings,
-    category: null,
-  });
+  let filter = {};
+  if (category) {
+    filter.category = category;
+  }
+  if (search && search.trim() !== "") {
+    filter.country = { $regex: search.trim(), $options: "i" };
+  }
+
+  const allListings = await Listing.find(filter);
+
+  if (allListings.length === 0) {
+    req.flash("error", "No listings found!");
+    return res.render("listings/index", {
+      allListings: [],
+      category,
+    });
+  }
+
+  res.render("listings/index", { allListings, category });
 };
+
+// module.exports.index = async (req, res) => {
+//   const allListings = await Listing.find({});
+//   console.log("Listings count:", allListings.length);
+
+//   res.render("listings/index", {
+//     allListings,
+//     category: null,
+//   });
+// };
 
 module.exports.new = (req, res) => {
   res.render("listings/new");
